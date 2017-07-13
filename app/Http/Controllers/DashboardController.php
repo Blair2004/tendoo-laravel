@@ -4,30 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dashboard\Menus;
-use App\Dashboard\Page;
+use App\Helpers\Page;
 
 class DashboardController extends Controller
-{
-    public function __construct()
+{    
+    public function __construct( Menus $menus )
     {
-        Menus::create( 'nexo.hello',[
-            'href'  =>  url( 'dashboard/nexo' ),
-            'icon'  =>  'icon- fa fa-home',
-            'text'  =>  'Bonjour'
-        ]);
-
-        Menus::add( 'nexo.delete', [
-            'href'  =>  url( 'dashboard/nexo' ),
-            'icon'  =>  'icon- fa fa-home',
-            'text'  =>  'Bonsoir',
-            'count' =>  1
-        ]);
-
-        Menus::add( 'nexo.compact', [
-            'href'  =>  url( 'dashboard/compact' ),
-            'icon'  =>  'icon- fa fa-zip',
-            'text'  =>  'All right'
-        ]);
+        $this->middleware('auth');
     }
 
     /**
@@ -39,6 +22,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+        Page::title( _i( 'Dashboard' ), _i( 'Main Page' ) );
         return view( 'dashboard.pages.index' );
     }
 
@@ -126,12 +110,15 @@ class DashboardController extends Controller
      * @return view
     **/
 
-    public function modules()
+    public function modules( $page = 'list' )
     {
-        config([ 'dashboard.page.show.title' => true ]);
-        config([ 'dashboard.page.title' =>  'Modules' ]);
-        config([ 'dashboard.page.subTitle' =>  'the modules list' ]);
-        return view( 'dashboard.pages.modules' );   
+        if( $page == 'list' ) {
+            Page::title( 'Modules List' );
+            return view( 'dashboard.pages.modules' ); 
+        } else if( $page == 'upload' ) {
+            Page::title( 'Modules Upload' );
+            return view( 'dashboard.pages.modules-upload' ); 
+        }
     }
 
     /**

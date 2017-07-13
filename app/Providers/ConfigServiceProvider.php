@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Dashbaord\Menus;
 
 class ConfigServiceProvider extends ServiceProvider
 {
+    protected $defer    =   true;
+    
     /**
      * Bootstrap the application services.
      *
@@ -23,41 +26,8 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $dashboard_menu     =   [];
-
-        // Dashboard index
-        config([ 'dashboard.menus.home.index' => [
-            'href'          =>  url( 'dashboard' ),
-            'text'          =>  'Dashboard',
-            'icon'          =>  'icon-compass'
-        ]]);
-
-        // Dashboard Module List
-        config([ 'dashboard.menus.modules.index' => [
-            'href'          =>  url( 'dashboard/modules' ),
-            'text'          =>  'Modules',
-            'icon'          =>  'icon-cursor'
-        ]]);
-
-        // dashboard users
-        config([ 'dashboard.menus.users.index' => [
-            'href'          =>  url( 'dashboard/users' ),
-            'text'          =>  'Users',
-            'icon'          =>  'icon-users'
-        ]]);
-
-        config([ 'dashboard.menus.users.add' => [
-            'href'          =>  url( 'dashboard/users/add' ),
-            'text'          =>  'Add',
-            'icon'          =>  'icon-users'
-        ]]);
-
-        config([ 'dashboard.menus.users.profile' => [
-            'href'          =>  url( 'dashboard/profile' ),
-            'text'          =>  'Your Profile',
-            'icon'          =>  'icon-users'
-        ]]);
-
-        
+        $this->app->singleton(Menus::class, function ($app) {
+            return new Menus();
+        });        
     }
 }
