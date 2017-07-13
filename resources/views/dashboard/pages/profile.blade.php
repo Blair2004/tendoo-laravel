@@ -1,4 +1,4 @@
-@extends( 'dashboard.layout.main' );
+@extends( 'dashboard.layout.main' )
 
 
 @section( 'dashboard.page.body' )

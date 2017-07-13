@@ -1,10 +1,21 @@
 @section( 'dashboard.page.footer' )
-<script src="{{ asset( '/js/helpers/modernizr.js' ) }}"></script>
-<script src="{{ asset( '/bower_components/jquery/dist/jquery.min.js' ) }}"></script>
-<script src="{{ asset( '/bower_components/bootstrap/dist/js/bootstrap.js' ) }}"></script>
-<script src="{{ asset( '/bower_components/fastclick/lib/fastclick.js' ) }}"></script>
-<script src="{{ asset( '/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js' ) }}"></script>
-<script src="{{ asset( '/js/helpers/smartresize.js' ) }}"></script>
-<script src="{{ asset( '/js/constants.js' ) }}"></script>
-<script src="{{ asset( '/js/main.js' ) }}"></script>
+<script src="{{ asset( 'libs/jquery/jquery.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/responsejs/response.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/loading-overlay/loadingoverlay.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/tether/js/tether.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/bootstrap/js/bootstrap.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/jscrollpane/jquery.jscrollpane.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/jscrollpane/jquery.mousewheel.js' ) }}"></script>
+<script src="{{ asset( 'libs/flexibility/flexibility.js' ) }}"></script>
+<script src="{{ asset( 'libs/noty/noty.min.js' ) }}"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="{{ asset( '/js/common.js' ) }}"></script>
+<!-- END THEME LAYOUT SCRIPTS -->
+
+<script src="{{ asset( 'libs/d3/d3.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/c3js/c3.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/noty/noty.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/maplace/maplace.min.js' ) }}"></script>
 @show

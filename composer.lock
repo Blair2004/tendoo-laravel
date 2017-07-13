@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd42859debe609b54683114720853ec6",
+    "content-hash": "176043ca60c8323301f68d138fd3b78a",
     "packages": [
         {
             "name": "belphemur/laravel-gettext",
@@ -1893,6 +1893,55 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2016-09-20T12:50:39+00:00"
+        },
+        {
+            "name": "tormjens/eventy",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tormjens/eventy.git",
+                "reference": "9dfa364d26766ff637287b7636b94dd0afafe60c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tormjens/eventy/zipball/9dfa364d26766ff637287b7636b94dd0afafe60c",
+                "reference": "9dfa364d26766ff637287b7636b94dd0afafe60c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TorMorten\\Eventy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tor Morten Jensen",
+                    "homepage": "https://tormorten.no"
+                }
+            ],
+            "description": "The WordPress filter/action system in Laravel",
+            "homepage": "https://github.com/tormjens/eventy",
+            "keywords": [
+                "HOOK",
+                "action",
+                "actions",
+                "event",
+                "events",
+                "filter",
+                "filters",
+                "hooks",
+                "laravel",
+                "wordpress"
+            ],
+            "time": "2017-01-20T12:22:20+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

@@ -1,30 +1,14 @@
-<footer class="session-footer">
-    <nav class="footer-right">
-    <ul class="nav">
+<div class="ks-footer">
+    <span class="ks-copyright">&copy; 2016 Kosmo</span>
+    <ul>
         <li>
-        <a href="javascript:;">Feedback</a>
+            <a href="#">Privacy Policy</a>
         </li>
         <li>
-        <a href="javascript:;" class="scroll-up">
-            <i class="fa fa-angle-up"></i>
-        </a>
+            <a href="#">Contact</a>
         </li>
     </ul>
-    </nav>
-    <nav class="footer-left hidden-xs">
-    <ul class="nav">
-        <li>
-        <a href="javascript:;"><span>About</span> Reactor</a>
-        </li>
-        <li>
-        <a href="javascript:;">Privacy</a>
-        </li>
-        <li>
-        <a href="javascript:;">Terms</a>
-        </li>
-        <li>
-        <a href="javascript:;">Help</a>
-        </li>
-    </ul>
-    </nav>
-</footer>
+</div>
+<script src="{{ asset( 'libs/jquery/jquery.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/tether/js/tether.min.js' ) }}"></script>
+<script src="{{ asset( 'libs/bootstrap/js/bootstrap.min.js' ) }}"></script>

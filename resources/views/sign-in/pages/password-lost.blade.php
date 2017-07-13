@@ -2,25 +2,35 @@
 
 @section( 'sign-in.layout.content' )
 
-<div class="session-wrapper">
-    <div class="page-height row-equal align-middle">
-    <div class="column">
-        <div class="card bg-white no-border">
+<div class="ks-body">
+    <div class="ks-logo">{{ config( 'app.name' ) }}</div>
+
+    <div class="card panel panel-default light ks-panel ks-forgot-password">
         <div class="card-block">
-            <form role="form" class="form-layout" action="extras-signin.html">
-            <div class="text-center m-b">
-                <h4 class="text-uppercase">Reset Password</h4>
-            </div>
-            <div class="form-inputs">
-                <label class="text-uppercase">Your email address</label>
-                <input type="email" class="form-control input-lg" placeholder="Email address" autofocus="" required="">
-            </div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Reset Password</button>
+            <form class="form-container" method="POST" action="{{ url()->route( 'sign-in.password-recovery' ) }}">
+                {{ csrf_field() }}
+                <h4 class="ks-header">
+                    {{ _i( 'Password Lost' ) }}
+                    <span>{{ _i( 'Don\'t worry, this happens sometimes.' ) }}</span>
+                </h4>
+
+                <div class="form-group">
+                    <div class="input-icon icon-left icon-lg icon-color-primary">
+                        <input type="text" class="form-control" placeholder="Email">
+                    <span class="icon-addon">
+                        <span class="la la-at"></span>
+                    </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">{{ _i( 'Sumit' ) }}</button>
+                </div>
+                <div class="ks-text-center">
+                    <a href="{{ url()->route( 'sign-in.index' ) }}">{{ _i( 'Sign in' ) }}</a>
+                </div>
             </form>
         </div>
-        <a href="extras-signin.html" class="bottom-link">Login instead.</a>
-        </div>
-    </div>
     </div>
 </div>
 

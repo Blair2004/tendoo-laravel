@@ -1,56 +1,40 @@
-<!-- sidebar panel -->
-<div class="sidebar-panel offscreen-left">
-    <div class="brand">
-    <!-- toggle offscreen menu -->
-    <div class="toggle-offscreen">
-        <a href="javascript:;" class="visible-xs hamburger-icon" data-toggle="offscreen" data-move="ltr">
-        <span></span>
-        <span></span>
-        <span></span>
-        </a>
-    </div>
-    <!-- /toggle offscreen menu -->
-    <!-- logo -->
-    <a class="brand-logo">
-        <span>{{ config( 'app.name' ) }}</span>
-    </a>
-    <a href="#" class="small-menu-visible brand-logo">R</a>
-    <!-- /logo -->
-    </div>
-    <!-- main navigation -->
-    <nav role="navigation">
-    <ul class="nav">
-        @foreach( config( 'dashboard.menus' ) as $namespace => $menus )
-            @if( count( $menus ) > 1 )
-        <li class="menu-accordion">
-            <a href="javascript:;">
-                <i class="{{ array_get( array_first( array_values( $menus ) ), 'icon' ) }}"></i>
-                <span>{{ array_get( array_first( array_values( $menus ) ), 'text' ) }}</span>
-            </a>
-            <ul class="sub-menu">
-                @foreach( $menus as $subNamespace => $menu )
-                <li class="sub-menu-{{ $subNamespace }} child-of-{{ $namespace }}">
-                    <a href="{{ $menu[ 'href' ] }}" class="sub-menu-{{ $subNamespace }}-link">
-                        <span class="sub-menu-{{ $subNamespace }}-text">{{ $menu[ 'text' ] }}</span>
+<!-- BEGIN DEFAULT SIDEBAR -->
+<div class="ks-column ks-sidebar ks-info">
+    <div class="ks-wrapper">
+        <section>
+            <ul class="nav nav-pills nav-stacked">
+            @foreach( config( 'dashboard.menus' ) as $namespace => $menus )
+                @if( count( $menus ) > 1 )  
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"  href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="ks-icon {{ array_get( array_first( array_values( $menus ) ), 'icon' ) }}"></i>
+                        <span>{{ array_get( array_first( array_values( $menus ) ), 'text' ) }}</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        @foreach( $menus as $subNamespace => $menu )
+                            @if( @$menu[ 'disable' ] != true )
+                        <a 
+                            class="dropdown-item sub-menu-{{ $subNamespace }} child-of-{{ $namespace }}" 
+                            href="{{ @$menu[ 'href' ] }}">
+                            <span class="sub-menu-{{ $subNamespace }}-text">{{ $menu[ 'text' ] }}</span>
+                        </a>
+                            @endif
+                        @endforeach
+                    </div>
+                </li>
+                @else
+                    @foreach( $menus as $subNamespace => $menu )
+                <li class="nav-item">
+                    <a class="nav-link"  href="{{ @$menu[ 'href' ] }}" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="ks-icon {{ @$menu[ 'icon' ] }}"></i>
+                        <span>{{ @$menu[ 'text' ] }}</span>
                     </a>
                 </li>
-                @endforeach
+                    @endforeach
+                @endif
+            @endforeach
             </ul>
-        </li>
-            @else
-                @foreach( $menus as $subNamespace => $menu )
-        <li class="menu-{{ $namespace }}">
-            <a href="{{ $menu[ 'href' ] }}" class="menu-{{ $namespace }}-link">
-                <i class="{{ $menu[ 'icon' ] }}"></i>
-                <span class="menu-{{ $namespace }}-text">{{ $menu[ 'text' ] }}</span>
-            </a>
-        </li>
-                @endforeach
-            @endif
-        
-        @endforeach    
-    </ul>
-    </nav>
-    <!-- /main navigation -->
+        </section>
+    </div>
 </div>
-<!-- /sidebar panel -->
+<!-- END DEFAULT SIDEBAR -->

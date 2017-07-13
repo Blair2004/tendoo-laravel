@@ -1,16 +1,17 @@
-<!-- content panel -->
-<div class="main-panel">
-    @include( 'dashboard.layout.header' )
-    <!-- main area -->
-    <div class="main-content {{ config( 'dashboard.page.body.padding', true ) == true ? '' : 'no-padding' }}">
-        @if( config( 'dashboard.page.show.title', false ) )
-        <div class="page-title">
-          <div class="title">{{ config( 'dashboard.page.title' ) }}</div>
-          <div class="sub-title">{{ config( 'dashboard.page.subTitle' ) }}</div>
+<div class="ks-page-container ks-dashboard-tabbed-sidebar-fixed-tabs">
+    @include( 'dashboard.layout.sidebar' )
+    <div class="ks-column ks-page">
+        @if( config( 'page.show.title', false ) )
+        
+        <div class="ks-header">
+            <section class="ks-title-and-subtitle">
+                <div class="ks-title-block">
+                    <h3 class="ks-main-title">{{ config( 'page.title' ) }}</h3>
+                    <div class="ks-sub-title">{{ config( 'page.subTitle' ) }}</div>
+                </div>
+            </section>
         </div>
         @endif
         @yield( 'dashboard.page.body' )
     </div>
-    <!-- /main area -->
 </div>
-<!-- /content panel -->
