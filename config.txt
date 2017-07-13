@@ -1,0 +1,4 @@
+dashboard.page.body.padding : can enable "no-padding" class over body inner content
+dashboard.page.show.title : show short title over inner content
+dashboard.page.title : host page title
+dashboard.page.subtitle : host page sub title
