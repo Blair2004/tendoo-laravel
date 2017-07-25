@@ -7907,7 +7907,7 @@ body.ks-sidebar-compact:not(.ks-sidebar-compact-open):not(.ks-sidebar-iconbar):n
 body.ks-sidebar-sections > .ks-container .ks-sidebar .ks-wrapper, body.ks-sidebar-sections .ks-page-container .ks-sidebar .ks-wrapper {
   margin-top: -60px; }
   body.ks-sidebar-sections > .ks-container .ks-sidebar .ks-wrapper section:first-child, body.ks-sidebar-sections .ks-page-container .ks-sidebar .ks-wrapper section:first-child {
-    margin-top: 75px; }
+    margin-top: 60px; }
   body.ks-sidebar-sections > .ks-container .ks-sidebar .ks-wrapper section + section, body.ks-sidebar-sections .ks-page-container .ks-sidebar .ks-wrapper section + section {
     margin-top: 15px; }
   body.ks-sidebar-sections > .ks-container .ks-sidebar .ks-wrapper section > .ks-header, body.ks-sidebar-sections .ks-page-container .ks-sidebar .ks-wrapper section > .ks-header {

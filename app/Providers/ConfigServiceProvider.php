@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Dashbaord\Menus;
+use App\Backend\Menus;
 
 class ConfigServiceProvider extends ServiceProvider
 {

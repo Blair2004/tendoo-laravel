@@ -1,0 +1,16 @@
+{
+    "name": "Todo",
+    "alias": "todo",
+    "description": "",
+    "keywords": [],
+    "active": 0,
+    "order": 0,
+    "providers": [
+        "Modules\\Todo\\Providers\\TodoServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

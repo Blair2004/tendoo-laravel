@@ -21,28 +21,37 @@
                         {{ session( 'response.message')}}
                     </div>
 
+                        @elseif( session( 'response.status' ) == 'success' ) 
+
+                    <div class="alert alert-success ks-solid" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true" class="la la-close"></span>
+                        </button>
+                        {{ session( 'response.message')}}
+                    </div>
+
                         @endif
                     @endif
 
-                    <div class="form-group {{ $errors->first( 'email' ) ? 'has-danger' : '' }}">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon">@</div>
-                            <input name="email" type="text" class="form-control {{ $errors->first( 'email' ) ? 'form-control-danger' : '' }}" placeholder="{{ _i( 'Email' ) }}">
-                        </div>
-                        <div class="form-control-feedback">{{ $errors->first( 'email' ) }}</div>
-                    </div>
-
-                    <div class="form-group {{ $errors->first( 'password' ) ? 'has-danger' : '' }}">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon">
+                    @foreach( ( array ) $fields->signin() as $name => $field )
+                        @if( in_array( @$field[ 'type'], [ 'text', 'password', 'email' ] ) )
+                        <div class="form-group {{ $errors->first( $name ) ? 'has-danger' : '' }}">
+                            <div class="input-icon icon-left icon-lg icon-color-primary">
+                                <input name="{{ $name }}" type="{{ @$field[ 'type' ] == null ? 'text' : $field[ 'type' ] }}" class="form-control" placeholder="{{ @$field[ 'text' ] }}">
                                 <span class="icon-addon">
-                                    <span class="la la-key"></span>
+                                    <span class="{{ @$field[ 'icon' ] }}"></span>
                                 </span>
                             </div>
-                            <input name="password" type="password" class="form-control {{ $errors->first( 'password' ) ? 'form-control-danger' : '' }}" placeholder="{{ _i( 'Password' ) }}">
+                            <div class="form-control-feedback">{{ $errors->first( $name ) }}</div>
                         </div>
-                        <div class="form-control-feedback">{{ $errors->first( 'password' ) }}</div>
-                    </div> 
+                        @elseif( @$field[ 'type' ] == 'checkbox' ) 
+                        <label class="custom-control custom-checkbox">
+                            <input name="{{ $name }}" type="checkbox"  class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ $field[ 'text' ] }}</span>
+                        </label>
+                        @endif
+                    @endforeach
 
                     <div class="form-group">
                         <button type="submit" type="button"class="btn btn-primary btn-block">{{_i( 'Login' ) }}</button>
@@ -55,7 +64,7 @@
                     @endif
 
                     <div class="ks-text-center">
-                        <a href="{{ url( 'sign-in/password-lost' ) }}">{{ _i( 'Forgot your password' ) }}</a>
+                        <a href="{{ url( 'sign-in/password-lost' ) }}">{{ _i( 'Forgot your password' ) }}</a> <hr> <a href="{{ route( 'sign-up.index' ) }}">{{ _i( 'Register a new account' ) }}</a>
                     </div>
                 </form>
             </div>

@@ -85,7 +85,7 @@
             </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Preview">
-            @foreach( config( 'dashboard.user-menus' ) as $menu )
+            @foreach( config( 'dashboard.user-menus', [] ) as $menu )
             <a class="dropdown-item" href="{{ $menu[ 'href' ] }}">
                 <span class="{{ @$menu[ 'icon' ] }} ks-icon"></span>
                 <span> {{ @$menu[ 'text' ] }} </span>

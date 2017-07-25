@@ -168,6 +168,8 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Xinax\LaravelGettext\LaravelGettextServiceProvider::class,
+        TorMorten\Eventy\EventServiceProvider::class,
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
         
         /*
          * Application Service Providers...
@@ -227,6 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Hook' => TorMorten\Eventy\Facades\Events::class,
+        'Module' => Nwidart\Modules\Facades\Module::class,
 
     ],
 

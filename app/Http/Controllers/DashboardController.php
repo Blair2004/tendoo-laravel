@@ -3,13 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dashboard\Menus;
+use Illuminate\Support\Facades\Auth;
+use App\Backend\Menus;
+use App\Backend\Options;
+use App\Backend\Gui;
 use App\Helpers\Page;
+use Validator;
 
 class DashboardController extends Controller
-{    
-    public function __construct( Menus $menus )
+{   
+    private $options;
+    
+    public function __construct( 
+        Menus $menus,
+        Options $options,
+        Gui $gui
+    )
     {
+        $this->options      =   $options;
+        $this->gui          =   $gui;
+        
+        // if( Auth::check() == false ) {
+        //     $this->middleware( 'auth.viaRememberCookie' );
+        // }
+        
         $this->middleware('auth');
     }
 
@@ -22,8 +39,49 @@ class DashboardController extends Controller
 
     public function index()
     {
-        Page::title( _i( 'Dashboard' ), _i( 'Main Page' ) );
-        return view( 'dashboard.pages.index' );
+        Page::title( __( 'Dashboard' ), __( 'Main Page' ) );
+
+        $this->gui->columns([
+            'foo.width'     =>  6,
+            'foo.title'     =>  __( 'Super Section' )
+        ]);
+
+        $this->gui->item( 'foo', [
+            'type'  =>      'text',
+            'name'  =>      'email',
+            'label' =>      __( 'Email' ),
+            'validation'    =>  'email_or_empty',
+            'description'   =>  __( 'Use email to submit' )
+        ]);
+
+        $this->gui->item( 'foo', [
+            'type'  =>      'text',
+            'name'  =>      'foo',
+            'label' =>      __( 'Foo field' ),
+            'description'   =>  __( 'This is something really cool' )
+        ]);
+
+        $this->gui->item( 'foo', [
+            'type'  =>      'textarea',
+            'name'  =>      'boom',
+            'label' =>      __( 'Textarea' ),
+            'description'   =>  __( 'This is something really cool' )
+        ]);
+
+        $this->gui->item( 'foo', [
+            'type'  =>      'select',
+            'options'   =>  [
+                'foo'   =>  'Foo',
+                'bar'   =>  'Bar'
+            ],
+            'name'  =>      'bar',
+            'label' =>      __( 'Bar field' ),
+            'description'   =>  __( 'This is something really cool' )
+        ]);
+
+        return view( 'dashboard.pages.index', [
+            'gui'   =>  $this->gui
+        ]);
     }
 
     /**
@@ -35,7 +93,39 @@ class DashboardController extends Controller
 
     public function settings()
     {
-        return view( 'dashboard.pages.settings' );
+        $this->gui->config([
+            'page.title'         =>  __( 'Tendoo Settings' ),
+            'page.subTitle'      =>  __( 'All application settings.' )
+        ]);
+
+        $this->gui->tabs([
+            'general.title'         =>  __( 'General' ),
+            'general.namespace'     =>  'general',
+            'bar.title'     =>  __( 'Advanced' ),
+            'bar.namespace'     =>  'advanced'
+        ]);
+
+        $this->gui->tabsColumns( 'general', [
+            'details.width'     =>  6,
+            'details.title'     =>  __( 'Informations' )
+        ]);
+
+        $this->gui->tabColumnItems( 'general', 'details', [
+            'type'          =>  'text',
+            'name'          =>  'app_name',
+            'label'         =>  __( 'Application Name' ),
+            'validation'    =>  'required',
+            'description'   =>  __( 'Provide a name for your installation.' )
+        ]);
+
+        Page::config([
+            'show.title'    =>  false
+        ]);
+
+        Page::title( __( 'Settings' ), __( 'Application Settings' ) );
+        return view( 'dashboard.pages.settings', [
+            'gui'       =>  $this->gui
+        ]);
     }
 
     /**
@@ -102,6 +192,43 @@ class DashboardController extends Controller
     public function options()
     {
         return view( 'dashboard.pages.options' );
+    }
+
+    /**
+     * Option Save
+     * get validation rules saved for each rules
+    **/
+
+    public function optionsSave( 
+        Request $request,
+        Options $options 
+    )
+    {
+        $formNamespaces     =   session( 'form-namespace' );
+        $validation         =   @$formNamespaces[ url()->previous() ];
+        // validate the form key
+        if( @$validation[ request( 'form-namespace' ) ] ) {
+            
+            $validator      =   Validator::make( $request->all(), $validation[ request( 'form-namespace' ) ] );
+
+            if ( $validator->fails() ) {
+                return redirect( url()->previous() )
+                ->withErrors($validator)
+                ->withInput();
+            }
+
+            foreach( request()->except( '_token' ) as $key => $value ) {
+                if( $key != '_token' ) {
+                    $options->set( $key, $value );
+                }
+            }
+            
+            return redirect( url()->previous() )
+            ->withResponse([
+                'status'    =>  'success',
+                'message'   =>  __( 'The options has been saved.' )
+            ]);
+        }
     }
 
     /**

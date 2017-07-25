@@ -72,8 +72,8 @@ body {
       background-color: #ffffff; }
       .ks-page > .ks-body > .ks-panel.ks-signup, .ks-page > .ks-body > .ks-panel.ks-forgot-password {
         width: 400px; }
-      .ks-page > .ks-body > .ks-panel.ks-signup {
-        min-height: 467px; }
+      /* .ks-page > .ks-body > .ks-panel.ks-signup {
+        min-height: 467px; } */
       .ks-page > .ks-body > .ks-panel.ks-login > .card-block > .form-container > .ks-header, .ks-page > .ks-body > .ks-panel.ks-signup > .card-block > .form-container > .ks-header, .ks-page > .ks-body > .ks-panel.ks-forgot-password > .card-block > .form-container > .ks-header {
         margin-bottom: 20px; }
       .ks-page > .ks-body > .ks-panel.ks-confirm > .card-block > .ks-header {

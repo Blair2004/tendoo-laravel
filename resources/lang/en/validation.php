@@ -13,6 +13,17 @@ return [
     |
     */
 
+    /*
+     | ------------------------------------------------------------------------
+     | Tendoo Custom Validation
+     | ------------------------------------------------------------------------
+     | 
+     | This is the custom validation introduced for Tendoo
+     | ------------------------------------------------------------------------
+    */
+
+    'email_or_empty'        =>  'The :attribute should be a email or empty.',
+
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',

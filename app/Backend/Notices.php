@@ -1,5 +1,5 @@
 <?php
-namespace App\Dashboard;
+namespace App\Backend;
 
 class Notices
 {

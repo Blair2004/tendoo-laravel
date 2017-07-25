@@ -3,7 +3,7 @@
     <div class="ks-wrapper">
         <section>
             <ul class="nav nav-pills nav-stacked">
-            @foreach( config( 'dashboard.menus' ) as $namespace => $menus )
+            @foreach( config( 'dashboard.menus', [] ) as $namespace => $menus )
                 @if( count( $menus ) > 1 )  
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"  href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Frontend\Fields;
 
 class SigninRequest extends FormRequest
 {
@@ -21,11 +22,15 @@ class SigninRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules( Fields $fields )
     {
-        return [
-            'email'         => 'required|email',
-            'password'      => 'required|min:6',
-        ];
+        $signupFielsd           =   $fields->signin();
+        $rules                  =   [];
+        foreach( $signupFielsd as $key => $field ) {
+            if( @$field[ 'rule' ] ) {
+                $rules[ $key ]      =   $field[ 'rule' ];
+            }
+        }
+        return $rules;
     }
 }

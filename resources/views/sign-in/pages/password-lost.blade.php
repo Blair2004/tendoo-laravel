@@ -14,13 +14,14 @@
                     <span>{{ _i( 'Don\'t worry, this happens sometimes.' ) }}</span>
                 </h4>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has( 'email' ) ? 'has-danger' : '' }}">
                     <div class="input-icon icon-left icon-lg icon-color-primary">
-                        <input type="text" class="form-control" placeholder="Email">
-                    <span class="icon-addon">
-                        <span class="la la-at"></span>
-                    </span>
+                        <input name="email" type="text" class="form-control" placeholder="Email">
+                        <span class="icon-addon">
+                            <span class="la la-at"></span>
+                        </span>
                     </div>
+                    <div class="form-control-feedback">{{ $errors->first( 'email' ) }}</div>
                 </div>
 
                 <div class="form-group">

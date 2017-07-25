@@ -32,15 +32,19 @@ Route::get( '/dashboard/help', 'DashboardController@help' )->name( 'dashboard.he
 
 Route::get( '/sign-in', 'SigninController@index' )->name( 'sign-in.index' );
 Route::get( '/sign-in/password-lost', 'SigninController@passwordLost' )->name( 'sign-in.password-lost' );
-Route::post( '/sign-in/password-recovery', 'SigninController@passwordRecovery' )->name( 'sign-in.password-recovery' );
 Route::get( '/sign-out', 'SignOutController@index' )->name( 'sign-out.index' );
+
+/**
+ * Sign Up specifics routes
+**/
+
+Route::get( '/sign-up', 'SignupController@index' )->name( 'sign-up.index' );
 
 /**
  * POST Routes
 **/
 
-Route::post( '/sign-in/login', 'SigninController@login' );
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post( '/sign-in/password-recovery', 'SigninController@sendResetLinkEmail' )->name( 'sign-in.password-recovery' );
+Route::post( '/sign-in/login', 'SigninController@login' )->name( 'sign-in.login' );
+Route::post( '/sign-up', 'SignupController@submit' )->name( 'sign-up.submit' ); // pick from register trait
+Route::post( '/dashboard/options-save', 'DashboardController@optionsSave' )->name( 'dashboard.options-save' );
