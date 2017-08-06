@@ -15,6 +15,16 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+    | -------------------------------------------------------------------------
+    | Application Version
+    | -------------------------------------------------------------------------
+    | This version will be useful to update the system. 
+    |
+    */
+
+    'version'   =>  '1.0',
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
@@ -168,12 +178,14 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Xinax\LaravelGettext\LaravelGettextServiceProvider::class,
-        TorMorten\Eventy\EventServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
+        Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
         
         /*
          * Application Service Providers...
          */
+        
+        App\Providers\OptionServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -229,8 +241,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Hook' => TorMorten\Eventy\Facades\Events::class,
         'Module' => Nwidart\Modules\Facades\Module::class,
+        'DotenvEditor' => Jackiedo\DotenvEditor\Facades\DotenvEditor::class,
 
     ],
 

@@ -22,6 +22,7 @@ class Options
 
     public function build()
     {
+        self::$options                  =   [];
         foreach( $this->rawOptions as $option ) {
             if( @self::$options[ $option[ 'key' ] ] == null ) {
                 if( ( bool ) $option[ 'array' ] ) {
@@ -68,7 +69,6 @@ class Options
         if( $bracket == '[]' ) {
             // reassign key value
             $key        =   substr( $key, 0, -2 );
-
             $option     =   Option::key( $key );
 
             // Fetch if item already exists

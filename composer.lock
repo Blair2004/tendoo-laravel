@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f8562fc5d33b90429206764b7d6729d",
+    "content-hash": "101f511bd025c41a281cc40e4390b28a",
     "packages": [
+        {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v2.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "d7c88f08131f6404cb714f3f6cf0642f6afa3903"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/d7c88f08131f6404cb714f3f6cf0642f6afa3903",
+                "reference": "d7c88f08131f6404cb714f3f6cf0642f6afa3903",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "maximebf/debugbar": "~1.13.0",
+                "php": ">=5.5.9",
+                "symfony/finder": "~2.7|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "time": "2017-07-21T11:56:48+00:00"
+        },
         {
             "name": "belphemur/laravel-gettext",
             "version": "5.0.2",
@@ -206,6 +255,55 @@
                 "parser"
             ],
             "time": "2017-03-29T16:04:15+00:00"
+        },
+        {
+            "name": "jackiedo/dotenv-editor",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JackieDo/Laravel-Dotenv-Editor.git",
+                "reference": "d27e12b8b120d49234d6759810ad06f076ee52cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JackieDo/Laravel-Dotenv-Editor/zipball/d27e12b8b120d49234d6759810ad06f076ee52cc",
+                "reference": "d27e12b8b120d49234d6759810ad06f076ee52cc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": ">=5.0",
+                "illuminate/container": ">=5.0",
+                "illuminate/support": ">=5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jackiedo\\DotenvEditor\\": "src/Jackiedo/DotenvEditor"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jackie Do",
+                    "email": "anhvudo@gmail.com"
+                }
+            ],
+            "description": "The .env file editor tool for Laravel 5+",
+            "keywords": [
+                "dotenv",
+                "dotenv-editor",
+                "laravel"
+            ],
+            "time": "2017-06-26T06:36:42+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -568,6 +666,67 @@
                 "storage"
             ],
             "time": "2017-04-28T10:15:08+00:00"
+        },
+        {
+            "name": "maximebf/debugbar",
+            "version": "1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "afee79a236348e39a44cb837106b7c5b4897ac2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/afee79a236348e39a44cb837106b7c5b4897ac2a",
+                "reference": "afee79a236348e39a44cb837106b7c5b4897ac2a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "^1.0",
+                "symfony/var-dumper": "^2.6|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\": "src/DebugBar/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug",
+                "debugbar"
+            ],
+            "time": "2017-01-05T08:46:19+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1408,7 +1567,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.3.2",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -1847,16 +2006,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.3.2",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "347c4247a3e40018810b476fcd5dec36d46d08dc"
+                "reference": "0f32b62d21991700250fed5109b092949007c5b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/347c4247a3e40018810b476fcd5dec36d46d08dc",
-                "reference": "347c4247a3e40018810b476fcd5dec36d46d08dc",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0f32b62d21991700250fed5109b092949007c5b3",
+                "reference": "0f32b62d21991700250fed5109b092949007c5b3",
                 "shasum": ""
             },
             "require": {
@@ -1911,7 +2070,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-06-02T09:10:29+00:00"
+            "time": "2017-07-10T14:18:27+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -1959,55 +2118,6 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2016-09-20T12:50:39+00:00"
-        },
-        {
-            "name": "tormjens/eventy",
-            "version": "0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tormjens/eventy.git",
-                "reference": "9dfa364d26766ff637287b7636b94dd0afafe60c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tormjens/eventy/zipball/9dfa364d26766ff637287b7636b94dd0afafe60c",
-                "reference": "9dfa364d26766ff637287b7636b94dd0afafe60c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TorMorten\\Eventy\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tor Morten Jensen",
-                    "homepage": "https://tormorten.no"
-                }
-            ],
-            "description": "The WordPress filter/action system in Laravel",
-            "homepage": "https://github.com/tormjens/eventy",
-            "keywords": [
-                "HOOK",
-                "action",
-                "actions",
-                "event",
-                "events",
-                "filter",
-                "filters",
-                "hooks",
-                "laravel",
-                "wordpress"
-            ],
-            "time": "2017-01-20T12:22:20+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3481,6 +3591,55 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-06-02T22:05:06+00:00"
+        },
+        {
+            "name": "tormjens/eventy",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tormjens/eventy.git",
+                "reference": "9dfa364d26766ff637287b7636b94dd0afafe60c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tormjens/eventy/zipball/9dfa364d26766ff637287b7636b94dd0afafe60c",
+                "reference": "9dfa364d26766ff637287b7636b94dd0afafe60c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TorMorten\\Eventy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tor Morten Jensen",
+                    "homepage": "https://tormorten.no"
+                }
+            ],
+            "description": "The WordPress filter/action system in Laravel",
+            "homepage": "https://github.com/tormjens/eventy",
+            "keywords": [
+                "HOOK",
+                "action",
+                "actions",
+                "event",
+                "events",
+                "filter",
+                "filters",
+                "hooks",
+                "laravel",
+                "wordpress"
+            ],
+            "time": "2017-01-20T12:22:20+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use App\Config;
 use App\Backend\Gui;
 use App\Backend\Options;
 use App\Frontend\Fields;
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
         Validator::extend( 'email_or_empty', function ($attribute, $value, $parameters, $validator) {
@@ -39,21 +41,14 @@ class AppServiceProvider extends ServiceProvider
     {
         require_once __DIR__ . '/../Helpers.php';
 
-        // save Singleton for options
-        $this->app->singleton( Options::class, function(){
-            return new Options;
-        });
-
-        // App::bind()
-        $this->app->singleton( Gui::class, function( $app ) {
-            return new Gui( 
-                $app->make( 'App\Backend\Options' )
-            );
+        // Init Config
+        $this->app->singleton( Config::class, function(){
+            return new Config;
         });
 
         // bing fields
-        $this->app->singleton( Fields::class, function(){
-            return new Fields;
-        });        
+        $this->app->singleton( Fields::class, function( $app ){
+            return new Fields( $app->make( Request::class ) );
+        });  
     }
 }

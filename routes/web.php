@@ -12,7 +12,7 @@
 */
 
 /**
- * Dashboard Specifics Routes
+* Dashboard Specifics Route
 **/
 
 Route::get( '/dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
@@ -27,7 +27,7 @@ Route::get( '/dashboard/profile', 'DashboardController@profile' )->name( 'dashbo
 Route::get( '/dashboard/help', 'DashboardController@help' )->name( 'dashboard.help' );
 
 /**
- * Sign In Specifics Routes
+* Sign In Specifics Routes
 **/
 
 Route::get( '/sign-in', 'SigninController@index' )->name( 'sign-in.index' );
@@ -35,16 +35,32 @@ Route::get( '/sign-in/password-lost', 'SigninController@passwordLost' )->name( '
 Route::get( '/sign-out', 'SignOutController@index' )->name( 'sign-out.index' );
 
 /**
- * Sign Up specifics routes
+* Sign Up specifics routes
 **/
 
 Route::get( '/sign-up', 'SignupController@index' )->name( 'sign-up.index' );
 
 /**
- * POST Routes
+* POST Routes
 **/
 
 Route::post( '/sign-in/password-recovery', 'SigninController@sendResetLinkEmail' )->name( 'sign-in.password-recovery' );
 Route::post( '/sign-in/login', 'SigninController@login' )->name( 'sign-in.login' );
 Route::post( '/sign-up', 'SignupController@submit' )->name( 'sign-up.submit' ); // pick from register trait
 Route::post( '/dashboard/options-save', 'DashboardController@optionsSave' )->name( 'dashboard.options-save' );
+
+/**
+ * Setup
+**/
+
+Route::get( '/setup', 'SetupController@index' )->name( 'setup.index' );
+Route::get( '/setup/{step}', 'SetupController@step' )->name( 'setup.step' );
+
+Route::post( '/setup/db', 'SetupController@db' )->name( 'setup.db' );
+Route::post( '/setup/app', 'SetupController@app' )->name( 'setup.app' );
+
+/**
+ * Errors
+**/
+
+Route::get( '/error/{code}', 'errorsController@index' )->name( 'error' );

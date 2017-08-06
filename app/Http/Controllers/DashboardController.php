@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+use App\Backend\Interfaces\Settings as SettingsUI;
 use App\Backend\Menus;
 use App\Backend\Options;
 use App\Backend\Gui;
+use App\Boot;
 use App\Helpers\Page;
 use Validator;
 
@@ -14,20 +18,17 @@ class DashboardController extends Controller
 {   
     private $options;
     
-    public function __construct( 
-        Menus $menus,
+    public function __construct(
         Options $options,
-        Gui $gui
+        Gui $gui,
+        Menus $menus,
+        Boot $boot     
     )
-    {
-        $this->options      =   $options;
-        $this->gui          =   $gui;
-        
-        // if( Auth::check() == false ) {
-        //     $this->middleware( 'auth.viaRememberCookie' );
-        // }
-        
-        $this->middleware('auth');
+    {     
+        $this->options      =    $options;
+        $this->gui          =    $gui;
+        $this->menu         =    $menus;
+        $this->middleware( 'auth' );
     }
 
     /**
@@ -91,38 +92,14 @@ class DashboardController extends Controller
      * @return
     **/
 
-    public function settings()
+    public function settings( SettingsUI $interface )
     {
-        $this->gui->config([
-            'page.title'         =>  __( 'Tendoo Settings' ),
-            'page.subTitle'      =>  __( 'All application settings.' )
-        ]);
-
-        $this->gui->tabs([
-            'general.title'         =>  __( 'General' ),
-            'general.namespace'     =>  'general',
-            'bar.title'     =>  __( 'Advanced' ),
-            'bar.namespace'     =>  'advanced'
-        ]);
-
-        $this->gui->tabsColumns( 'general', [
-            'details.width'     =>  6,
-            'details.title'     =>  __( 'Informations' )
-        ]);
-
-        $this->gui->tabColumnItems( 'general', 'details', [
-            'type'          =>  'text',
-            'name'          =>  'app_name',
-            'label'         =>  __( 'Application Name' ),
-            'validation'    =>  'required',
-            'description'   =>  __( 'Provide a name for your installation.' )
-        ]);
-
         Page::config([
             'show.title'    =>  false
         ]);
 
         Page::title( __( 'Settings' ), __( 'Application Settings' ) );
+        
         return view( 'dashboard.pages.settings', [
             'gui'       =>  $this->gui
         ]);
@@ -206,29 +183,49 @@ class DashboardController extends Controller
     {
         $formNamespaces     =   session( 'form-namespace' );
         $validation         =   @$formNamespaces[ url()->previous() ];
-        // validate the form key
-        if( @$validation[ request( 'form-namespace' ) ] ) {
             
-            $validator      =   Validator::make( $request->all(), $validation[ request( 'form-namespace' ) ] );
+        foreach( ( array ) request( 'form-namespace' ) as $namespace => $code ) {
+            // if validation exists
+            if( @$validation[ $namespace ] ) {
 
-            if ( $validator->fails() ) {
-                return redirect( url()->previous() )
-                ->withErrors($validator)
-                ->withInput();
-            }
+                // validation code match session validation code
+                if( @$validation[ $namespace ][ 'code' ] == $code ) {
+                    
+                    $validator      =   Validator::make( $request->all(), $validation[ $namespace ][ 'rules' ] );
 
-            foreach( request()->except( '_token' ) as $key => $value ) {
-                if( $key != '_token' ) {
-                    $options->set( $key, $value );
+                    if ( $validator->fails() ) {
+                        return redirect( url()->previous() )
+                        ->withErrors($validator)
+                        ->withInput();
+                    }
+
+                    foreach( request()->except( '_token' ) as $key => $value ) {
+                        if( $key != '_token' ) {
+                            $options->set( $key, $value );
+                        }
+                    }
+                    
+                    return redirect( url()->previous() )
+                    ->withResponse([
+                        'status'    =>  'success',
+                        'message'   =>  __( 'The options has been saved.' )
+                    ]);
+
+                    break;
                 }
             }
-            
-            return redirect( url()->previous() )
-            ->withResponse([
-                'status'    =>  'success',
-                'message'   =>  __( 'The options has been saved.' )
-            ]);
         }
+
+        // give a reason
+        Log::error( sprintf( 'Unable to save options from %s, since the validation rules are not set or doesn\'t match the session validation rules', 
+            url()->previous()
+        ) );
+
+        return redirect( url()->previous() )
+        ->withResponse([
+            'status'    =>  'error',
+            'message'   =>  __( 'Validation rules required.' )
+        ]);
     }
 
     /**

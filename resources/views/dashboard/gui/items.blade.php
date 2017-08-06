@@ -13,20 +13,13 @@
     @endif
 
     @if( $item[ 'type' ] == 'select' )
-    <!-- Select Field -->
-    <fieldset class="form-group {{ $errors->first( $item[ 'name' ] ) ? 'has-danger' : '' }}">
-        <label class="form-control-label label-{{ $item[ 'name' ] }}" for="{{ $item[ 'name' ] }}">{{ @$item[ 'label' ] }}</label>
-        <select 
-        name="{{ $item[ 'name' ] }}" 
-        id="field-{{ $index . '-' . $item[ 'name' ] }}" 
-        class="form-control">
-            @foreach( ( array ) @$item[ 'options' ] as $value => $text )
-            <option value="{{ $value }}">{{ $text }}</option>
-            @endforeach
-        </select>
-        <p class="help-block">{{ $errors->first( $item[ 'name' ] ) ? $errors->first( $item[ 'name' ] ) : @$item[ 'description' ] }}</p>
-    </fieldset>
-    <!-- end select field -->
+
+        @if( is_array( @$options[ $item[ 'name' ] ] ) )
+            @include( 'dashboard.gui.items-select' )
+        @else
+            @include( 'dashboard.gui.items-select' )
+        @endif        
+
     @endif
 
     @if( $item[ 'type' ] == 'textarea' )
@@ -47,4 +40,4 @@
     @endif
 
 @endforeach
-<input name="form-namespace" type="hidden" value="{{ $gui->formNamespace( $namespace ) }}"/>
+<input name="form-namespace[{{ $namespace }}]" type="hidden" value="{{ $gui->formNamespace( $namespace ) }}"/>

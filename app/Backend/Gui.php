@@ -126,11 +126,6 @@ class Gui
     }
 
     /**
-     * Get tab title
-     * @return array
-    **/
-
-    /**
      * Form namespace
      * @return string unique form namespace
     **/
@@ -141,11 +136,21 @@ class Gui
         if( @$this->validations[ $namespace ] ) {
             $uniqueNamespace    =   str_random(20);
             $formNamespaces     =   ( array ) session( 'form-namespace' );
-            $formNamespaces[ url()->current() ]     =   [
-                $uniqueNamespace    =>  $this->validations[ $namespace ]
+
+            // if some rules already exists
+            if( ! is_array( @$formNamespaces[ url()->current() ] ) ) {
+                $formNamespaces[ url()->current() ]     =   [];
+            }
+
+            // save validation rules
+            $formNamespaces[ url()->current() ][ $namespace ]    =   [
+                'rules'             =>  $this->validations[ $namespace ],
+                'code'              =>  @$uniqueNamespace
             ];
+
             // saving form validation after render
             session([ 'form-namespace' =>   $formNamespaces ]);
+
             return $uniqueNamespace;
         } 
         return false;       

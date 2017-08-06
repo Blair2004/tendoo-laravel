@@ -19,7 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('surname')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->boolean( 'active' )->default( false );
             $table->string('password');
+            $table->integer( 'role_id' )->default( config( 'tendoo.subscriber-role', 1 ) ); // default role is subscriber
             $table->rememberToken();
             $table->timestamps();
         });
