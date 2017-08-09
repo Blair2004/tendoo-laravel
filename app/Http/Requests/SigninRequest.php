@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Frontend\Fields;
+use App\Services\Fields;
 
 class SigninRequest extends FormRequest
 {

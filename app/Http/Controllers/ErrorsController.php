@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Boot;
-use App\Helpers\Page;
+use App\Services\Boot;
+use App\Services\Page;
 
 class ErrorsController extends Controller
 {

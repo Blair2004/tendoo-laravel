@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Backend\Options;
-use App\Backend\Gui;
+use App\Services\Options;
+use App\Services\Gui;
 
 class OptionServiceProvider extends ServiceProvider
 {
@@ -28,16 +28,6 @@ class OptionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // save Singleton for options
-        $this->app->singleton( Options::class, function(){
-            return new Options;
-        });
 
-        // App::bind()
-        $this->app->singleton( Gui::class, function( $app ) {
-            return new Gui( 
-                $app->make( Options::class )
-            );
-        });
     }
 }

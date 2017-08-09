@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Helpers\Page;
-use App\Frontend\Fields;
+use App\Services\Page;
+use App\Services\Fields;
 use App\Http\Requests\SignupRequest;
-use App\User;
+use App\Models\User;
 
 class SignupController extends Controller
 {

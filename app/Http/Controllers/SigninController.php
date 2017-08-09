@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use App\Http\Requests\SigninRequest;
-use App\Helpers\Page;
-use App\Frontend\Fields;
+use App\Services\Page;
+use App\Services\Fields;
 
 
 class SigninController extends Controller

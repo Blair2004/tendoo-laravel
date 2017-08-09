@@ -8,12 +8,12 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
   @section( 'sign-in.page.head' )
   <!-- page stylesheets -->
-	<link rel="stylesheet" type="text/css" href="{{ asset( 'libs/bootstrap/css/bootstrap.min.css' ) }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset( 'fonts/line-awesome/css/line-awesome.min.css' ) }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset( 'fonts/open-sans/styles.css' ) }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset( 'libs/tether/css/tether.min.css' ) }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset( 'css/common.css' ) }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset( 'css/pages/auth.css' ) }}">
+	@bower_css( 'bootstrap/css/bootstrap.min' )
+		@fonts( 'line-awesome/css/line-awesome.min' )
+		@fonts( 'open-sans/styles' )
+		@bower_css( 'tether/css/tether.min' )
+		@css( 'common.min' )
+		@css( 'pages/auth.min' )
 	<!-- end page stylesheets -->
 	@show
 	<!-- endbuild -->

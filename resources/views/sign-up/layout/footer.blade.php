@@ -9,6 +9,6 @@
         </li>
     </ul>
 </div>
-<script src="{{ asset( 'libs/jquery/jquery.min.js' ) }}"></script>
-<script src="{{ asset( 'libs/tether/js/tether.min.js' ) }}"></script>
-<script src="{{ asset( 'libs/bootstrap/js/bootstrap.min.js' ) }}"></script>
+@bower_js( 'jquery/jquery.min') 
+@bower_js( 'tether/js/tether.min' )
+@bower_js( 'bootstrap/js/bootstrap.min' )

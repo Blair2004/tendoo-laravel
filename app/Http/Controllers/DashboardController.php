@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-use App\Backend\Interfaces\Settings as SettingsUI;
-use App\Backend\Menus;
-use App\Backend\Options;
-use App\Backend\Gui;
-use App\Boot;
-use App\Helpers\Page;
+use App\Services\Interfaces\DashboardSettings as SettingsUI;
+use App\Services\Menus;
+use App\Services\Options;
+use App\Services\Gui;
+use App\Services\Boot;
+use App\Services\Page;
 use Validator;
 
 class DashboardController extends Controller
@@ -118,7 +118,19 @@ class DashboardController extends Controller
         config([ 'dashboard.page.title' => "Bonjour" ]);
         config([ 'dashboard.page.subTitle' => "foo ar" ]);
 
-        return view( 'dashboard.pages.users' );
+        $this->gui->config([ 'table.filter' => false ]);
+        $this->gui->config([ 'table.name'   =>  __( 'Users List' )]);
+        $this->gui->config([ 'table.namespace' => 'users' ]);
+        $this->gui->config([ 'table.columns'    =>  [
+            'name'      =>  __( 'User Name' ),
+            'email'     =>  __( 'Email' ),
+            'role'      =>  __( 'Role' ),
+            'status'    =>  __( 'Status' ),
+        ]]);
+
+        return view( 'dashboard.pages.users', [
+            'gui'       =>   $this->gui
+        ]);
     }
 
     /**
@@ -199,7 +211,7 @@ class DashboardController extends Controller
                         ->withInput();
                     }
 
-                    foreach( request()->except( '_token' ) as $key => $value ) {
+                    foreach( request()->except( '_token', 'form-namespace' ) as $key => $value ) {
                         if( $key != '_token' ) {
                             $options->set( $key, $value );
                         }

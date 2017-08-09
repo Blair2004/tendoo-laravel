@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Mail;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
-use App\Frontend\Fields;
+use App\Services\Fields;
 use App\Http\Requests\DBSetupRequest;
 use App\Http\Requests\AppSetupRequest;
-use App\Backend\Options;
-use App\Helpers\Page;
-use App\Setup;
-use App\User;
-use App\Role;
+use App\Services\Options;
+use App\Services\Page;
+use App\Services\Setup;
+use App\Models\User;
+use App\Models\Role;
 use App\Mail\WelcomeMail;
 
 class SetupController extends Controller
