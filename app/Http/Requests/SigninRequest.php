@@ -24,9 +24,9 @@ class SigninRequest extends FormRequest
      */
     public function rules( Fields $fields )
     {
-        $signupFielsd           =   $fields->signin();
+        $signupFields           =   $fields->signin();
         $rules                  =   [];
-        foreach( $signupFielsd as $key => $field ) {
+        foreach( $signupFields as $key => $field ) {
             if( @$field[ 'rule' ] ) {
                 $rules[ $key ]      =   $field[ 'rule' ];
             }

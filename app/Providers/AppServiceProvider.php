@@ -10,6 +10,8 @@ use App\Config;
 use App\Services\Gui;
 use App\Services\Options;
 use App\Services\Fields;
+use App\Services\Enqueue;
+use App\Services\Hook;
 use App\Models\User;
 
 
@@ -81,8 +83,20 @@ class AppServiceProvider extends ServiceProvider
         // App::bind()
         $this->app->singleton( Gui::class, function( $app ) {
             return new Gui( 
-                $app->make( Options::class )
+                $app->make( Options::class ),
+                $app->make( Enqueue::class ),
+                $app->make( Hook::class )
             );
+        });
+
+        // Enquqeue Service as Singleton
+        $this->app->singleton( Enqueue::class, function() {
+            return new Enqueue();
+        });
+
+        // Enquqeue Service as Singleton
+        $this->app->singleton( Hook::class, function() {
+            return new Hook();
         });
     }
 }

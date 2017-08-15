@@ -18,13 +18,14 @@
 Route::get( '/dashboard', 'DashboardController@index' )->name( 'dashboard.index' );
 Route::get( '/dashboard/modules', 'DashboardController@modules' )->name( 'dashboard.modules' );
 Route::get( '/dashboard/settings', 'DashboardController@settings' )->name( 'dashboard.settings' );
-Route::get( '/dashboard/users', 'DashboardController@users' )->name( 'dashboard.users' );
+Route::get( '/dashboard/users/{page?}/{id?}', 'DashboardController@users' )->name( 'dashboard.users' );
 Route::get( '/dashboard/about', 'DashboardController@about' )->name( 'dashboard.about' );
 Route::get( '/dashboard/update', 'DashboardController@update' )->name( 'dashboard.update' );
 Route::get( '/dashboard/store', 'DashboardController@store' )->name( 'dashboard.store' );
 Route::get( '/dashboard/options', 'DashboardController@options' )->name( 'dashboard.options' );
 Route::get( '/dashboard/profile', 'DashboardController@profile' )->name( 'dashboard.profile' );
 Route::get( '/dashboard/help', 'DashboardController@help' )->name( 'dashboard.help' );
+Route::get( '/dashboard/templates/{file}', 'DashboardController@templates' )->name( 'dashboard.templates' );
 
 /**
 * Sign In Specifics Routes
@@ -64,3 +65,10 @@ Route::post( '/setup/app', 'SetupController@app' )->name( 'setup.app' );
 **/
 
 Route::get( '/error/{code}', 'errorsController@index' )->name( 'error' );
+
+// RestFul Api
+Route::resource( 'api/users', 'UserController', [ 'names'   =>   [
+     'store'                  =>   'users.create',
+     'update'                 =>   'users.update',
+     'destroy'                =>   'users.delete'
+] ]);

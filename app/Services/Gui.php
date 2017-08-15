@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Services\Options;
+use App\Services\Enqueue;
 use Illuminate\Http\Request;
 
 class Gui
@@ -14,10 +15,14 @@ class Gui
     public  $request;
 
     public function __construct( 
-        Options $options
+        Options $options,
+        Enqueue $enqueue,
+        Hook $hook
     )
     {
         $this->options      =   $options;
+        $this->enqueue      =   $enqueue;
+        $this->hook         =   $hook;
         $this->request      =   app()->make( Request::class );
     }
 
@@ -228,14 +233,39 @@ class Gui
     public function render( $view = 'column' )
     {
         if( $view == 'column' ) {
-            Enqueue::css( 'myscript', 'foo/bar', [ 'dependencie' ]);
             return view( 'dashboard.gui.columns', [
                 'gui'           =>  $this
             ]);
-        } else if( $view == 'crm-table' ) {
-            return view( 'dashboard.gui.components.' . $view, [
-                'gui'           =>  $this
-            ]);
+        } else if( $view == 'table' ) {
+
+            // check the current page of the CRUD.
+            if( array_get( $this->config, 'table.page' ) == null ) {
+                Enqueue::footerJS( 'table-factory', 'angular/factories/table-factory' );
+                Enqueue::footerJS( 'table-alert', 'angular/factories/alert-factory' );
+                Enqueue::footerJS( 'table-moment', 'angular/factories/moment-factory' );
+                Enqueue::footerJS( 'table-currency', 'angular/factories/currency-factory' );
+                Enqueue::bowerCSS( 'sweet-alert', 'sweetalert/sweetalert' );
+                Enqueue::bowerJS( 'sweet-alert', 'sweetalert/sweetalert' );
+                Enqueue::bowerJS( 'ng-sweet-alert', 'ngSweetAlert/SweetAlert.min' );
+
+                $this->hook->filter( 'angular_dependencies', function( $deps ) {
+                    $deps[]     =   'oitozero.ngSweetAlert';
+                    return $deps;
+                });
+                
+                $this->hook->action( 'dashboard_footer', function(){
+                    echo view( 'dashboard.gui.components.table.resource' );
+                    echo view( 'dashboard.gui.components.table.directive' );
+                });
+                
+                return view( 'dashboard.gui.components.table.views.body', [
+                    'gui'           =>  $this
+                ]);
+            } else if( array_get( $this->config, 'table.page' ) == 'update' ) {
+                echo 'OK';
+            } else if( array_get( $this->config, 'table.page' ) == 'create' ) {
+                echo 'Fuse';
+            }           
         }        
     }
 
@@ -252,5 +282,29 @@ class Gui
         }
 
         $this->validations[ $namespace ][ $item[ 'name' ] ]    =   $item[ 'validation' ];  
+    }
+
+    /**
+     * Parse table config
+     * @param string config
+     * @return array
+    **/
+
+    public function parseColumnRules( $allRules )
+    {
+        $finalConfig        =   [];
+        foreach( $allRules as $key => &$rules ) {
+            $finalConfig[ $key ]        =   [];
+            $rules              =   explode( '|', $rules );
+            foreach( $rules as $rule ) {
+                $singleRules     =   explode( ':', $rule );
+                if( count( $singleRules ) == 1 ) {
+                    $finalConfig[ $key ][ $singleRules[0] ]       =   $singleRules[0];
+                } else {
+                    $finalConfig[ $key ][ $singleRules[0] ]       =   $singleRules[1];
+                }
+            }
+        }
+        return $finalConfig;
     }
 }     

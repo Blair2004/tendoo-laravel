@@ -19,7 +19,10 @@
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
-          justify-content: space-between; }
+          justify-content: space-between; 
+  border-bottom: solid 1px #d4d4d4;
+    margin-bottom: 15px;
+        }
 
 .ks-user-list-view-header-block-name {
   margin: 0 !important;

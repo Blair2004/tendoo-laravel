@@ -1,4 +1,5 @@
 @inject( 'page', 'App\Services\Page' )
+@inject( 'Enqueue', 'App\Services\Enqueue' )
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -25,7 +26,18 @@
         @fonts( 'kosmo/styles' )
         @fonts( 'open-sans/styles' )
         @fonts( 'weather/css/weather-icons.min' )
-    <!-- end page stylesheets -->
+
+        <!-- Looping Bower CSS -->
+        @foreach( $Enqueue::getBowerStylesheets() as $file )
+            @bower_css( $file[ 'url' ] )
+        @endforeach
+        <!-- End Looping -->
+        
+        <!-- Loping Stylesheet -->
+        @foreach( $Enqueue::getStylesheets() as $file )
+            @css( $file[ 'url' ] )
+        @endforeach
+        <!-- end page stylesheets -->
     @show
     <!-- endbuild -->
 </head>

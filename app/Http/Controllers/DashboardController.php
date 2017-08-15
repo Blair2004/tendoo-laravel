@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationRuleParser;
 
 use App\Services\Interfaces\DashboardSettings as SettingsUI;
 use App\Services\Menus;
@@ -112,20 +113,30 @@ class DashboardController extends Controller
      * @return
     **/
 
-    public function users()
+    public function users( $page = null, $id = null )
     {
         config([ 'dashboard.page.body.padding' => true ]);
         config([ 'dashboard.page.title' => "Bonjour" ]);
         config([ 'dashboard.page.subTitle' => "foo ar" ]);
 
-        $this->gui->config([ 'table.filter' => false ]);
-        $this->gui->config([ 'table.name'   =>  __( 'Users List' )]);
-        $this->gui->config([ 'table.namespace' => 'users' ]);
+        $this->gui->config([ 'table.page'       =>  $page ]);
+        $this->gui->config([ 'table.name'       =>  __( 'Users List' )]);
+        $this->gui->config([ 'table.resource'   => 'users' ]);
         $this->gui->config([ 'table.columns'    =>  [
-            'name'      =>  __( 'User Name' ),
-            'email'     =>  __( 'Email' ),
-            'role'      =>  __( 'Role' ),
-            'status'    =>  __( 'Status' ),
+            'username'          =>  __( 'User Name' ),
+            'email'             =>  __( 'Email' ),
+            'role'              =>  __( 'Role' ),
+            'active'            =>  __( 'Status' ),
+        ]]);
+        
+        $this->gui->config([ 'table.routes'     =>  [
+            'create'            =>  url()->route( 'dashboard.users', [ 'page'   =>  'create' ]),
+            'update'            =>  url()->route( 'users.update', [ 'id' => ':id' ]),
+            'delete'            =>  url()->route( 'users.delete', [ 'id' => ':id' ])
+        ]]);
+
+        $this->gui->config([ 'table.columns-config' => [
+            'name'      =>  'is:email|width:200'
         ]]);
 
         return view( 'dashboard.pages.users', [
@@ -267,5 +278,16 @@ class DashboardController extends Controller
     {
         Page::title( 'Profile' );
         return view( 'dashboard.pages.profile' );
+    }
+
+    /** 
+     * Angular Directives
+     * @param string template url
+     * @return output view
+    **/
+
+    public function templates( $file )
+    {
+        return view( 'dashboard.templates.' . $file );
     }
 }

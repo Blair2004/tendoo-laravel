@@ -1314,7 +1314,7 @@ table {
   margin-top: 30px; }
 
 .row + .row {
-  margin-top: 30px; }
+  margin-top: 15px; }
 
 .ks-column-section > .row + .row {
   margin-top: 30px; }
@@ -1586,13 +1586,22 @@ textarea.form-control {
 .custom-checkbox > .custom-control-indicator {
   top: 0;
   background-color: #fff;
-  width: 18px;
-  height: 18px;
+  width: 25px;
+  height: 25px;
   -webkit-border-radius: 2px;
-          border-radius: 2px;
+  border-radius: 2px;
   border: solid 1px #dedede;
   font-size: 12px;
   color: #fff; }
+.table thead th {
+    vertical-align: middle;
+    border-bottom: 2px solid #eceeef;
+}
+
+td-table tr th > label.custom-checkbox {
+  min-height: 20px;
+  margin-bottom:0px;
+}
 
 .custom-checkbox > .custom-control-input:checked ~ .custom-control-indicator {
   background: #fff;
@@ -1604,7 +1613,7 @@ textarea.form-control {
   content: "\f17b";
   font-weight: bold;
   font-family: "LineAwesome";
-  font-size: 14px;
+  font-size: 15px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1612,13 +1621,13 @@ textarea.form-control {
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  line-height: 16px; }
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 24px; }
 
 .custom-checkbox > .custom-control-input:focus ~ .custom-control-indicator {
   -webkit-box-shadow: none;
@@ -2315,7 +2324,7 @@ textarea.form-control {
   .btn.btn-sm {
     font-size: 12px;
     padding: 5px 15px;
-    height: 27px; }
+    height: 30px; }
     .btn.btn-sm.ks-split {
       padding: 0; }
       .btn.btn-sm.ks-split > .ks-text {
@@ -4604,7 +4613,7 @@ h6 .badge {
 
 .page-link {
   font-size: 13px;
-  padding: 8px 14px;
+  padding: 10px 14px;
   color: #25628F;
   background-color: #fff;
   border: 1px solid #c4cbe1; }
@@ -4710,18 +4719,24 @@ h6 .badge {
 
 .table td, .table th {
   border-top: 1px solid #dee0e1;
-  padding: 11px 20px; }
+  padding: 10px; }
 
 .table td {
   color: #333;
-  font-size: 13px; }
+  font-size: 15px; }
   .table td .table-cell-header {
     margin-top: 5px;
     margin-bottom: 10px;
     color: #858585; }
   .table td.text-light, .table td .ks-text-light {
     color: #858585; }
+  .table td label.ks-checkbox {
+    vertical-align  : middle;
+  }
 
+.table td.table-actions {
+  vertical-align: inherit;
+}
 .table .thead-default td, .table .thead-default th, .table .ks-thead-default td, .table .ks-thead-default th, .table .ks-table-row-separator td, .table .ks-table-row-separator th {
   background-color: #ebeef5; }
 
@@ -4737,7 +4752,7 @@ h6 .badge {
 
 .table .checkbox-cell {
   padding: 10px 15px;
-  vertical-align: top; }
+  vertical-align: baseline; }
   .table .checkbox-cell > .custom-control {
     padding-left: 16px;
     margin: 0; }
@@ -4771,6 +4786,12 @@ h6 .badge {
   .table .ks-table-cell-block .ks-progress-block-container {
     float: left;
     vertical-align: middle; }
+  .td-crud-table .dropdown-menu-right {
+      right: 9px;
+      left: auto;
+      top: 43px;
+  }
+
   .table .table-cell-block .image-block-container, .table .table-cell-block .ks-image-block-container, .table .ks-table-cell-block .image-block-container, .table .ks-table-cell-block .ks-image-block-container {
     margin-right: 12px; }
   .table .table-cell-block .progress-block-container, .table .table-cell-block .ks-progress-block-container, .table .ks-table-cell-block .progress-block-container, .table .ks-table-cell-block .ks-progress-block-container {
@@ -8028,3 +8049,30 @@ body.ks-sidebar-compact:not(.ks-sidebar-compact-open).ks-sidebar-sections > .ks-
     color: #333333;
     font-weight: 500;
     margin-bottom: 40px; }
+
+@media (max-width: 767px) {
+  .table-responsive .dropdown-menu,
+  .table-responsive .dropdown-toggle {
+        position: static !important;
+  }
+}
+
+@media (min-width: 768px) {
+    .table-responsive {
+        overflow: visible;
+    }
+}
+
+
+td-table .custom-control {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  padding-top: 1.3rem;
+}

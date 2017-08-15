@@ -2,9 +2,9 @@
 
 @section( 'dashboard.page.head' )
     @parent
-    @css( 'apps/crm/users-list.min' )
+    @css( 'apps/crm/users-list' )
 @endsection
 
 @section( 'dashboard.page.body' )
-{!! $gui->render( 'crm-table' ) !!}
+{!! $gui->render( 'table' ) !!}
 @endsection
