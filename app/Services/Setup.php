@@ -43,7 +43,8 @@ class Setup
 
     public function createTables()
     {
-        Artisan::call( 'migrate:refresh' );
+        Artisan::call( 'migrate' );
+        // Artisan::call( 'passport:install' );
     }
 
     /**

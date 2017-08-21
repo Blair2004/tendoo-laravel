@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\Fields;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     public function __construct(
         User $user

@@ -1,10 +1,6 @@
 <div class="ks-user-list-view-header-block">
      <h4 class="ks-user-list-view-header-block-name">
-     {{ @$gui->config[ 'table' ][ 'name' ] }}
-     <span class="ks-user-list-view-header-block-amount">
-          <span class="ks-icon la la-users"></span>
-          <span>5 candidates</span>
-     </span>
+     @{{ title }}
      </h4>
 
      <div class="ks-user-list-view-header-control">
@@ -19,8 +15,8 @@
             <div class="col-md-3">
                 <div class="input-group" ng-hide="hideSearch">
                     <input ng-model="searchModel" placeholder="Search" type="text" class="form-control" placeholder="">
-                    <button ng-click="table.search()" type="button" class="btn btn-primary"><i class="la la-search"></i></button>
-                    <button ng-click="table.clear()" type="button" class="btn btn-secondary">2</button>
+                    <button ng-click="table.search()" type="button" class="btn btn-secondary"><i class="la la-search"></i></button>
+                    <!-- <button ng-click="table.clear()" type="button" class="btn btn-secondary">2</button> -->
                 </div>
             </div>
             <div class="col-md-6">

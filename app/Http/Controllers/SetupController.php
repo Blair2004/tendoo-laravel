@@ -17,6 +17,7 @@ use App\Services\Setup;
 use App\Models\User;
 use App\Models\Role;
 use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Artisan;
 
 class SetupController extends Controller
 {

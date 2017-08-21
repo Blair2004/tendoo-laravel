@@ -67,8 +67,21 @@ Route::post( '/setup/app', 'SetupController@app' )->name( 'setup.app' );
 Route::get( '/error/{code}', 'errorsController@index' )->name( 'error' );
 
 // RestFul Api
-Route::resource( 'api/users', 'UserController', [ 'names'   =>   [
-     'store'                  =>   'users.create',
-     'update'                 =>   'users.update',
-     'destroy'                =>   'users.delete'
-] ]);
+// Route::resource( 'api/users', 'UsersController', [ 'names'   =>   [
+//      'store'                  =>   'users.create',
+//      'update'                 =>   'users.update',
+//      'destroy'                =>   'users.delete'
+// ]]);
+
+// // RestFul Api
+// Route::resource( 'api/roles', 'RolesController', [ 'names'   =>   [
+//      'store'                  =>   'roles.create',
+//      'update'                 =>   'roles.update',
+//      'destroy'                =>   'roles.delete'
+// ]]);
+
+// Route::resource( 'api/{resource}', 'ApiController', [ 'names'    =>   [
+//      'store'                  =>   'api.create',
+//      'update'                 =>   'api.update',
+//      'destroy'                =>   'api.delete'
+// ]]);

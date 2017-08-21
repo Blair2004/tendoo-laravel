@@ -5,6 +5,9 @@ use App\Services\Options;
 use App\Services\Enqueue;
 use Illuminate\Http\Request;
 
+use App\Services\Assets\DashboardGuiTable;
+use App\Services\Assets\DashboardGuiCrud;
+
 class Gui
 {
     private $columns            =   [];
@@ -230,7 +233,9 @@ class Gui
      * @return void
     **/
 
-    public function render( $view = 'column' )
+    public function render( 
+        $view = 'column'
+    )
     {
         if( $view == 'column' ) {
             return view( 'dashboard.gui.columns', [
@@ -240,13 +245,9 @@ class Gui
 
             // check the current page of the CRUD.
             if( array_get( $this->config, 'table.page' ) == null ) {
-                Enqueue::footerJS( 'table-factory', 'angular/factories/table-factory' );
-                Enqueue::footerJS( 'table-alert', 'angular/factories/alert-factory' );
-                Enqueue::footerJS( 'table-moment', 'angular/factories/moment-factory' );
-                Enqueue::footerJS( 'table-currency', 'angular/factories/currency-factory' );
-                Enqueue::bowerCSS( 'sweet-alert', 'sweetalert/sweetalert' );
-                Enqueue::bowerJS( 'sweet-alert', 'sweetalert/sweetalert' );
-                Enqueue::bowerJS( 'ng-sweet-alert', 'ngSweetAlert/SweetAlert.min' );
+
+                // Resolve Assets loading
+                app()->make( DashboardGuiTable::class );            
 
                 $this->hook->filter( 'angular_dependencies', function( $deps ) {
                     $deps[]     =   'oitozero.ngSweetAlert';
@@ -261,10 +262,28 @@ class Gui
                 return view( 'dashboard.gui.components.table.views.body', [
                     'gui'           =>  $this
                 ]);
+                
             } else if( array_get( $this->config, 'table.page' ) == 'update' ) {
                 echo 'OK';
             } else if( array_get( $this->config, 'table.page' ) == 'create' ) {
-                echo 'Fuse';
+
+                // Resolve Assets loading
+                app()->make( DashboardGuiCrud::class ); 
+
+                $this->hook->filter( 'angular_dependencies', function( $deps ) {
+                    $deps[]     =   'oitozero.ngSweetAlert';
+                    return $deps;
+                });
+                
+                $this->hook->action( 'dashboard_footer', function(){
+                    echo view( 'dashboard.gui.components.table.resource' );
+                    echo view( 'dashboard.gui.components.table.crud-directive' );
+                });
+                
+                return view( 'dashboard.gui.components.table.views.create', [
+                    'gui'           =>  $this
+                ]);
+
             }           
         }        
     }

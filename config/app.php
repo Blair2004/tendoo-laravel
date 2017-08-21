@@ -177,6 +177,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
         Xinax\LaravelGettext\LaravelGettextServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
         Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,

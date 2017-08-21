@@ -5,9 +5,7 @@
             @include( 'dashboard.gui.components.table.views.filter' )
         @endif
         <div class="ks-nav-body">
-            <td-table>
-                Loading...
-            </td-table>
+            <td-form>Loading...</td-form>
         </div>
     </div>
 </div>

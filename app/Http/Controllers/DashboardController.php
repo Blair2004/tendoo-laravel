@@ -122,17 +122,45 @@ class DashboardController extends Controller
         $this->gui->config([ 'table.page'       =>  $page ]);
         $this->gui->config([ 'table.name'       =>  __( 'Users List' )]);
         $this->gui->config([ 'table.resource'   => 'users' ]);
+        $this->gui->config([ 'table.subject'    =>  [ __( 'User' ), __( 'Users' )]]);
         $this->gui->config([ 'table.columns'    =>  [
             'username'          =>  __( 'User Name' ),
             'email'             =>  __( 'Email' ),
             'role'              =>  __( 'Role' ),
             'active'            =>  __( 'Status' ),
         ]]);
+
+        $this->gui->config([ 'table.fields'     =>  [
+            'username'          =>  sprintf( 
+                'required|min:6|label:%s|description:%s', 
+                __( 'User Name' ), 
+                __( 'This user name will be used for login purpose.' ) 
+            ),
+            'email'             =>  sprintf( 
+                'required|email|label:%s|description:%s', 
+                __( 'Email' ),
+                __( 'This email should be unique.' )
+            ),
+            'password'          =>  sprintf( 
+                'required|password|label:%s',
+                __( 'Password' )
+            ),
+            'password_confirm'  =>  sprintf( 
+                'required|match:password|password|label:%s',
+                __( 'Password Confirmation' )
+            ),
+            'role'              =>  sprintf( 
+                'required|relation:roles|relation_key:id|relation_value:name|label:%s|description:%s', 
+                __( 'Role' ),
+                __( 'Assign a role to a user, will give access to specific features. If you assign Master Role, then the user will be able to do everything, even delete your account.' )
+            )
+        ]]);
         
         $this->gui->config([ 'table.routes'     =>  [
             'create'            =>  url()->route( 'dashboard.users', [ 'page'   =>  'create' ]),
             'update'            =>  url()->route( 'users.update', [ 'id' => ':id' ]),
-            'delete'            =>  url()->route( 'users.delete', [ 'id' => ':id' ])
+            'delete'            =>  url()->route( 'users.delete', [ 'id' => ':id' ]),
+            'list'              =>  url()->route( 'dashboard.users' )
         ]]);
 
         $this->gui->config([ 'table.columns-config' => [

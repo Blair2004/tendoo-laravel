@@ -10,6 +10,7 @@
         "belphemur/laravel-gettext": "^5.0",
         "jackiedo/dotenv-editor": "^1.0",
         "laravel/framework": "5.4.*",
+        "laravel/passport": "^3.0",
         "laravel/tinker": "~1.0",
         "nwidart/laravel-modules": "^1.26"
     },
